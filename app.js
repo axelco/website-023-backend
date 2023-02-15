@@ -1,24 +1,33 @@
+require('dotenv').config({path: __dirname + '/.env'})
 const express = require('express');
+const mongoose = require('mongoose');
+
+
+mongoose.connect('mongodb+srv://admin:YE7eKhUNhh2Xeb99@cluster0.xzue7.mongodb.net/'+process.env['DB_NAME'],
+  { useNewUrlParser: true,
+    useUnifiedTopology: true }
+)
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
+const router = express.Router();
+
+
+// This middleware will allow us to read every json content-type sent to server
+//  Without it we won't be able to read post request with json body
+app.use(express.json()); 
 
 app.use((req, res, next) => {
-  console.log('Requête reçue !');
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Referrer-Policy', 'no-referrer');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
 
-app.use((req, res, next) => {
-  res.status(201);
-  next();
-});
+const HelloWorldRoute = require('./routes/HelloWorld.js')
+app.use('/helloWorld', HelloWorldRoute);
 
-app.use((req, res, next) => {
-  res.json({ message: 'Votre requête a bien été reçue !' });
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log('Réponse envoyée avec succès !');
-});
 
 module.exports = app;
