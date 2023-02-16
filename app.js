@@ -29,5 +29,7 @@ app.use((req, res, next) => {
 const HelloWorldRoute = require('./routes/HelloWorld.js')
 app.use('/helloWorld', HelloWorldRoute);
 
+const ResumeRoute = require('./routes/Resume')
+app.use('/resume', ResumeRoute);
 
 module.exports = app;
