@@ -32,4 +32,7 @@ app.use('/helloWorld', HelloWorldRoute);
 const ResumeRoute = require('./routes/Resume')
 app.use('/resume', ResumeRoute);
 
+const PersonalInfosRoute = require('./routes/PersonalInfos')
+app.use('/personal-infos', PersonalInfosRoute);
+
 module.exports = app;
