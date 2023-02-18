@@ -34,3 +34,18 @@ exports.getIntro = (req,res,next) => {
   );
 
 }
+
+exports.getHardSkills = (req, res,next) => {
+  ResumeQueries.getHardSkillsByContext(req.params.jobContext)
+  .then(
+    (hardSkills)=>{
+      res.status(200).json(hardSkills);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );  
+}

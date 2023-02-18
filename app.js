@@ -35,8 +35,4 @@ app.use('/resume', ResumeRoute);
 const PersonalInfosRoute = require('./routes/PersonalInfos')
 app.use('/personal-infos', PersonalInfosRoute);
 
-// We need to authorize access to images
-const path = require('path');
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
 module.exports = app;

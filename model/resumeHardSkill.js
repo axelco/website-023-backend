@@ -14,6 +14,10 @@ const schema = mongoose.Schema({
         type:String, 
         required : false,
     },   
+    order: {
+        type: Number,
+        required: true,
+    }
 })
 
 module.exports = mongoose.model('ResumeHardSkill', schema)
