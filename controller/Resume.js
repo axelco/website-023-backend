@@ -1,9 +1,8 @@
-const ResumeJobs = require('../model/resumeJob');
-const ResumeIntros = require('../model/resumeIntro')
+const ResumeQueries = require ('../queries/ResumeQueries')
 
 exports.GetJobTypes = (req, res, next) => {
 
-    ResumeJobs.find()
+    ResumeQueries.findAllJobTypes()
     .then(
       (resumeJob) => {
         res.status(200).json(resumeJob);
@@ -21,9 +20,7 @@ exports.GetJobTypes = (req, res, next) => {
 // @params jobContext : correspond à l'ID d'un resumeJob
 exports.getIntro = (req,res,next) => {
 
-  ResumeIntros.findOne({jobContext : req.params.jobContext})
-  .populate('jobContext')
-  .exec()
+  ResumeQueries.getIntroByContext(req.params.jobContext)
   .then(
     (intro)=>{
       res.status(200).json(intro);
