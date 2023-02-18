@@ -15,4 +15,4 @@ const schema = mongoose.Schema({
     },      
 })
 
-module.exports = mongoose.model('ResumeJob', schema)
+module.exports = mongoose.model('ResumeContext', schema)

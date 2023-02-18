@@ -1,12 +1,12 @@
-const ResumeJobs = require('../model/resumeJob');
+const ResumeContext = require('../model/resumeContext');
 const ResumeIntros = require('../model/resumeIntro')
 
 exports.findAllJobTypes = () => {
-    return ResumeJobs.find()
+    return ResumeContext.find()
 }
 
-exports.getIntroByContext = (jobContextId) => {
-    return ResumeIntros.findOne({jobContext : jobContextId})
+exports.getIntroByContext = (jobContext) => {
+    return ResumeIntros.findOne({jobContext : jobContext})
     .populate('jobContext')
     .exec()
 }

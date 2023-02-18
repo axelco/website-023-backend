@@ -1,7 +1,7 @@
 const ResumeQueries = require ('../queries/ResumeQueries')
 
 exports.GetJobTypes = (req, res, next) => {
-
+    
     ResumeQueries.findAllJobTypes()
     .then(
       (resumeJob) => {
@@ -19,7 +19,7 @@ exports.GetJobTypes = (req, res, next) => {
 
 // @params jobContext : correspond à l'ID d'un resumeJob
 exports.getIntro = (req,res,next) => {
-
+  
   ResumeQueries.getIntroByContext(req.params.jobContext)
   .then(
     (intro)=>{

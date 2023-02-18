@@ -5,15 +5,15 @@ const schema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'ResumeContext',
         required : true,
-    },
-    description : {
+    },    
+    name : {
         type:String, 
         required : true,
-    },          
-    shortDescription : {
+    },      
+    emoji : {
         type:String, 
         required : false,
-    },      
+    },   
 })
 
-module.exports = mongoose.model('ResumeIntro', schema)
+module.exports = mongoose.model('ResumeHardSkill', schema)
