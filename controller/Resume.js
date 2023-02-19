@@ -49,3 +49,18 @@ exports.getHardSkills = (req, res,next) => {
     }
   );  
 }
+
+exports.getSoftSkills = (req, res,next) => {
+  ResumeQueries.getSoftSkills()
+  .then(
+    (softSkills)=>{
+      res.status(200).json(softSkills);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );  
+}

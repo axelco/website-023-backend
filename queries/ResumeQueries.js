@@ -1,6 +1,7 @@
 const ResumeContext = require('../model/resumeContext')
 const ResumeIntros = require('../model/resumeIntro')
 const ResumeHardSkills = require ('../model/resumeHardSkill')
+const ResumeSoftSkills = require('../model/resumeSoftSkill')
 
 exports.findAllJobTypes = () => {
     return ResumeContext.find()
@@ -17,5 +18,9 @@ exports.getIntroByContext = (jobContext) => {
 // On sort par défaut en fonction du champ order par ordre descendant
 exports.getHardSkillsByContext = (jobContext) => {
     return ResumeHardSkills.find({jobContext : jobContext})
-    .sort( { order : 1 } )
+        .sort( { order : 1 } )
+}
+
+exports.getSoftSkills = () => {
+    return ResumeSoftSkills.find().sort( { order : 1 } )
 }
