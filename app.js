@@ -35,4 +35,7 @@ app.use('/resume', ResumeRoute);
 const PersonalInfosRoute = require('./routes/PersonalInfos')
 app.use('/personal-infos', PersonalInfosRoute);
 
+const UserRoutes = require('./routes/User')
+app.use('/user', UserRoutes);
+
 module.exports = app;
