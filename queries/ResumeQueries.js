@@ -2,6 +2,7 @@ const ResumeContext = require('../model/resumeContext')
 const ResumeIntros = require('../model/resumeIntro')
 const ResumeHardSkills = require ('../model/resumeHardSkill')
 const ResumeSoftSkills = require('../model/resumeSoftSkill')
+const JobCompanies = require('../model/jobCompany')
 
 exports.findAllJobTypes = () => {
     return ResumeContext.find()
@@ -23,4 +24,12 @@ exports.getHardSkillsByContext = (jobContext) => {
 
 exports.getSoftSkills = () => {
     return ResumeSoftSkills.find().sort( { order : 1 } )
+}
+
+exports.getJobCompanies = () => {
+    return JobCompanies.find()
+}
+
+exports.getSingleJobCompany = (id) => {
+    return JobCompanies.findById(id)
 }
