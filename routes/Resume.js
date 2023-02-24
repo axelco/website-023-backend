@@ -17,4 +17,9 @@ router.post('/job-companies',auth, adminOnly, jobsController.createCompany);
 router.get('/job-companies/:id',auth, adminOnly, jobsController.getSingleCompany);
 router.put('/job-companies/:id',auth, adminOnly, jobsController.saveCompany);
 
+router.get('/jobs', jobsController.getJobs);
+router.get('/jobs/:id', jobsController.getSingleJob);
+router.post('/jobs',auth, adminOnly,  jobsController.createJob);
+router.put('/jobs/:id',auth, adminOnly,  jobsController.saveJob);
+
 module.exports = router;
