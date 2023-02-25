@@ -31,6 +31,14 @@ const schema = mongoose.Schema({
         type: String,
         required: false,
     },    
+    missionsContent : {
+        type: String,
+        required: false,
+    },
+    successContent : {
+        type: String,
+        required: false,
+    }
 
 
 })

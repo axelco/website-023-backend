@@ -220,13 +220,18 @@ exports.createJob = (req, res, next) => {
       location: req.body.location,
     });
 
-    if(req.body.endDate){
-        job.endDate = req.body.endDate
-    }
+        
+    job.shortDescription = req.body.shortDescription && req.body.shortDescription !== "" 
+    ? req.body.shortDescription : undefined
 
-    if(req.body.shortDescription){
-        job.shortDescription = req.body.shortDescription
-    }    
+    job.endDate = req.body.endDate && req.body.endDate !== "" 
+    ? req.body.endDate : undefined
+
+    job.successContent = req.body.successContent && req.body.successContent !== "" 
+      ? req.body.successContent : undefined
+
+    job.missionsContent = req.body.missionsContent && req.body.missionsContent !== "" 
+    ? req.body.missionsContent : undefined  
   
     job.save().then(
       () => {
@@ -259,9 +264,18 @@ exports.createJob = (req, res, next) => {
         item.startDate = req.body.startDate
         item.contractType = req.body.contractType
         item.location = req.body.location
-        item.shortDescription = req.body?.shortDescription
-        item.endDate = req.body?.endDate
+        
+        item.shortDescription = req.body.shortDescription && req.body.shortDescription !== "" 
+        ? req.body.shortDescription : undefined
 
+        item.endDate = req.body.endDate && req.body.endDate !== "" 
+        ? req.body.endDate : undefined
+
+        item.successContent = req.body.successContent && req.body.successContent !== "" 
+          ? req.body.successContent : undefined
+
+        item.missionsContent = req.body.missionsContent && req.body.missionsContent !== "" 
+          ? req.body.missionsContent : undefined          
   
         item.save()
         .then(
