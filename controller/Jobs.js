@@ -93,7 +93,7 @@ exports.createCompany = (req, res, next) => {
     )
   }
 
-  exports.getJobs = (req, res, next) => {
+exports.getJobs = (req, res, next) => {
     ResumeQueries.getJobs()
     .then(
         (jobs)=>{
@@ -106,6 +106,93 @@ exports.createCompany = (req, res, next) => {
           });
         }
       );      
+}
+
+exports.getJobsGrouped = (req,res,next) => {
+  ResumeQueries.getJobs()
+  .then(
+      (jobs)=>{
+
+        // Resp est l'array de la réponse
+        // Il contiendra des objets regroupant les jobs
+        // De chaque company
+        let jobsByCompanies = []
+
+        jobs.forEach((item)=>{
+
+          const itemIndex = jobs.indexOf(item)
+
+          // On créé on objet CompanyItem pour le groupe par société
+          // Car on y ajoutera des données que mongoose ne connait pas dans le 
+          // Model JobCompany (sans ça on ne peut les ajouter)
+          const companyItem = {
+            _id : item.company._id,
+            name : item.company.name,
+            description : item.company?.description,
+            websiteUrl : item.company?.websiteUrl,
+          }
+
+          // Cet object représente le groupe de jobs avec la société associée
+          let companyObject = {
+            company : companyItem,
+            jobs : [],
+          }
+
+          // Pour le premier item de la loop,
+          // On va simplement créer notre premier objet dans resp
+          if(itemIndex === 0){
+
+            companyObject.jobs.push(item)
+            jobsByCompanies.push(companyObject)
+
+          }
+          // Pour les autres éléments de la loop
+          // On doit contrôler si l'élément précédent avait la même company
+          // Afin de déterminer si on regroupe ou non l'item de la loop avec un
+          // object existant
+          else{
+
+            const previousItem = jobs[itemIndex - 1]
+
+            if(previousItem.company._id === item.company._id){
+
+              // Ici on doit donc simplement ajouter item dans l'array de la société
+              // déjà dans l'array resp
+              let findRespCompany = jobsByCompanies.find(e => e.company._id === item.company._id)
+              findRespCompany.jobs.push(item)
+
+            }else{
+              // Ici on doit créer un nouvel objet Company avec le job en question
+              companyObject.jobs.push(item)
+              jobsByCompanies.push(companyObject)                            
+            }
+          }
+
+        })
+
+        // Il faut placer des dates de début de et fin pour chaque groupe de société
+        // En regardant les dates de début / fin de chaque item.jobs
+          // On prend la date de fin du premier item, et la date du début du dernier
+        jobsByCompanies.forEach((item)=>{
+            const nbJobsInCompany = item.jobs.length
+            const latestJob = item.jobs[0]
+            const oldestJob = item.jobs[nbJobsInCompany -1]
+
+            item.company.startDate = oldestJob.startDate
+            item.company.endDate = latestJob.endDate
+            
+        })        
+
+        res.status(200).json(jobsByCompanies);
+
+      }
+    ).catch(
+      (error) => {
+        res.status(400).json({
+          error: error
+        });
+      }
+    );      
 }
 
 exports.getSingleJob = (req, res, next) => {
