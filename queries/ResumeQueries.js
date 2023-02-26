@@ -5,7 +5,7 @@ const ResumeSoftSkills = require('../model/resumeSoftSkill')
 const JobCompanies = require('../model/jobCompany')
 const Job = require('../model/job')
 
-exports.findAllJobTypes = () => {
+exports.getResumeContexts = () => {
     return ResumeContext.find()
 }
 

@@ -1,8 +1,8 @@
 const ResumeQueries = require ('../queries/ResumeQueries')
 
-exports.GetJobTypes = (req, res, next) => {
+exports.GetResumeContexts = (req, res, next) => {
     
-    ResumeQueries.findAllJobTypes()
+    ResumeQueries.getResumeContexts()
     .then(
       (resumeJob) => {
         res.status(200).json(resumeJob);
