@@ -26,7 +26,8 @@ const schema = mongoose.Schema({
         required : true,
     },         
     availability : {
-        type : String,
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Availability',
         required : true,
     },
     hobbies : {
