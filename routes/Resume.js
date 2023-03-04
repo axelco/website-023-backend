@@ -3,6 +3,7 @@ const router = express.Router();
 
 const controller = require('../controller/Resume');
 const jobsController = require('../controller/Jobs');
+const diplomasController = require('../controller/Diplomas')
 
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
@@ -23,5 +24,7 @@ router.get('/jobs-grouped', jobsController.getJobsGrouped);
 router.get('/jobs/:id', jobsController.getSingleJob);
 router.post('/jobs',auth, adminOnly,  jobsController.createJob);
 router.put('/jobs/:id',auth, adminOnly,  jobsController.saveJob);
+
+router.get('/diplomas', diplomasController.GetDiplomas)
 
 module.exports = router;
