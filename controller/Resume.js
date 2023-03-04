@@ -17,6 +17,22 @@ exports.GetResumeContexts = (req, res, next) => {
 
 }
 
+exports.getSingleResumeContext = (req,res,next) => {
+  ResumeQueries.getSingleResumeContext(req.params.id)
+  .then(
+    (context) => {
+      res.status(200).json(context)
+      
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );
+}
+
 // @params jobContext : correspond à l'ID d'un resumeJob
 exports.getIntro = (req,res,next) => {
   
