@@ -18,7 +18,7 @@ exports.GetResumeContexts = (req, res, next) => {
 }
 
 exports.getSingleResumeContext = (req,res,next) => {
-  ResumeQueries.getSingleResumeContext(req.params.id)
+  ResumeQueries.getSingleResumeContextByName(req.params.name)
   .then(
     (context) => {
       res.status(200).json(context)
@@ -33,10 +33,10 @@ exports.getSingleResumeContext = (req,res,next) => {
   );
 }
 
-// @params jobContext : correspond à l'ID d'un resumeJob
+// req.resume.contextId est paramétré dans le middleware
 exports.getIntro = (req,res,next) => {
-  
-  ResumeQueries.getIntroByContext(req.params.jobContext)
+
+  ResumeQueries.getIntroByContextId(req.resume.contextId)
   .then(
     (intro)=>{
       res.status(200).json(intro);
@@ -48,11 +48,10 @@ exports.getIntro = (req,res,next) => {
       });
     }
   );
-
 }
 
 exports.getHardSkills = (req, res,next) => {
-  ResumeQueries.getHardSkillsByContext(req.params.jobContext)
+  ResumeQueries.getHardSkillsByContext(req.resume.contextId)
   .then(
     (hardSkills)=>{
       res.status(200).json(hardSkills);

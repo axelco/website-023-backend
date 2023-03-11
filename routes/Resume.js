@@ -7,11 +7,15 @@ const diplomasController = require('../controller/Diplomas')
 
 const auth = require('../middleware/auth');
 const adminOnly = require('../middleware/adminOnly');
+const contextChecker = require('../middleware/resumeContextChecker')
 
 router.get('/contexts', controller.GetResumeContexts);
-router.get('/contexts/:id', controller.getSingleResumeContext);
-router.get('/intro/:jobContext', controller.getIntro);
-router.get('/hard-skills/:jobContext', controller.getHardSkills);
+router.get('/contexts/:name', controller.getSingleResumeContext);
+
+// Ces routes nécessitent un context Name de CV
+router.get('/intro/:contextName',contextChecker, controller.getIntro);
+router.get('/hard-skills/:contextName',contextChecker, controller.getHardSkills);
+
 router.get('/soft-skills', controller.getSoftSkills);
 
 router.get('/job-companies', jobsController.getCompanies);

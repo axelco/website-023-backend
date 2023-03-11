@@ -13,8 +13,12 @@ exports.getSingleResumeContext = (id) => {
     return ResumeContext.findById(id)
 }
 
-exports.getIntroByContext = (jobContext) => {
-    return ResumeIntros.findOne({jobContext : jobContext})
+exports.getSingleResumeContextByName = (name) => {
+    return ResumeContext.findOne({technicalName: name})
+}
+
+exports.getIntroByContextId = (jobContextID) => {
+    return ResumeIntros.findOne({jobContext : jobContextID})
     .populate('jobContext')
     .exec()
 }
