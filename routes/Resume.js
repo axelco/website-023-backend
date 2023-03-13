@@ -15,6 +15,7 @@ router.get('/contexts/:name', controller.getSingleResumeContext);
 // Ces routes nécessitent un context Name de CV
 router.get('/intro/:contextName',contextChecker, controller.getIntro);
 router.get('/hard-skills/:contextName',contextChecker, controller.getHardSkills);
+router.get('/pdf/:contextName',contextChecker, controller.getPdf);
 
 router.get('/soft-skills', controller.getSoftSkills);
 

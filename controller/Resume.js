@@ -50,6 +50,21 @@ exports.getIntro = (req,res,next) => {
   );
 }
 
+exports.getPdf = (req,res,next) => {
+  ResumeQueries.getResumePdfByContextId(req.resume.contextId)
+  .then(
+    (pdf)=>{
+      res.status(200).json(pdf);
+    }
+  ).catch(
+    (error) => {
+      res.status(400).json({
+        error: error
+      });
+    }
+  );  
+}
+
 exports.getHardSkills = (req, res,next) => {
   ResumeQueries.getHardSkillsByContext(req.resume.contextId)
   .then(

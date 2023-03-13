@@ -1,4 +1,5 @@
 const ResumeContext = require('../model/resumeContext')
+const ResumePdf = require('../model/resumePdf')
 const ResumeIntros = require('../model/resumeIntro')
 const ResumeHardSkills = require ('../model/resumeHardSkill')
 const ResumeSoftSkills = require('../model/resumeSoftSkill')
@@ -23,6 +24,11 @@ exports.getIntroByContextId = (jobContextID) => {
     .exec()
 }
 
+exports.getResumePdfByContextId = (jobContextId) => {
+    return ResumePdf.findOne({jobContext : jobContextId})
+}
+
+
 // On récupère les hardSkills en fonction du paramètre jobContext
 // qui représente un objectId lié au modèle resumeContext
 // On sort par défaut en fonction du champ order par ordre descendant
@@ -30,6 +36,7 @@ exports.getHardSkillsByContext = (jobContext) => {
     return ResumeHardSkills.find({jobContext : jobContext})
         .sort( { order : 1 } )
 }
+
 
 exports.getSoftSkills = () => {
     return ResumeSoftSkills.find().sort( { order : 1 } )
